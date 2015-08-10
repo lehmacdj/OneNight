@@ -20,12 +20,20 @@ public class Main {
         try {
             //open the in and out streams
             for (Socket s : server.getConnections()) {
-               out.add(new PrintStream(s.getOutputStream(), true));
+               out.add(new PrintStream(s.getOutputStream(), false));
                in.add(new BufferedReader(new InputStreamReader(s.getInputStream())));
             }
-            
-            out.stream().forEach( (o) -> {o.println("Everyone has connected to the one night server let the games begin!");} );
-            
+            String input = null;
+            boolean inProgress = true;
+            while (inProgress) {
+                for (PrintStream o : out) {
+                    o.print(OneNightProtocol.processInput(input));
+                    o.flush();
+                }
+                for (BufferedReader i : in) {
+                    input = i.readLine();
+                }
+            }
             
             
             
