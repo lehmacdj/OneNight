@@ -17,23 +17,15 @@ public class Server {
     public Server(int port, int players) {
         PORT = port;
         connections = new ArrayList<>();
-        
+        //connect to all of the clients
         try (
-            ServerSocket server = new ServerSocket(PORT);
+            ServerSocket serverSocket = new ServerSocket(PORT);
         ) {
-            Socket socket;
             while (connections.size() < players) {
-                connections.add(socket = server.accept());
-                try ( 
-                    final PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                ) {
-                    out.println("You have been connected to the One Night Server");
-                } catch (IOException e) {
-                    System.err.println("Could not get output stream for socket.");
-                }
+                Socket socket = serverSocket.accept();
+                connections.add(socket);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println("Could not connect to client.");
         }
 
