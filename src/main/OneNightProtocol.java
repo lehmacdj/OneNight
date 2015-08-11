@@ -1,9 +1,11 @@
 package main;
 
+import java.util.Scanner;
+
 /**
  * @author devin
  */
-public class OneNightProtocol {
+public class OneNightProtocol { 
     
     static enum State {
         
@@ -12,12 +14,18 @@ public class OneNightProtocol {
     static State state;
     
     public static String processInput(String input) {
-        if (input == null)
-            return "Everyone has connected to the one night server let the games begin!  Please enter your name:  ";
-        switch (input) {
-            case "":
-                
+        if (input == null) {
+            return "Error: input string is null";
         }
-        return null;
+        Scanner scan = new Scanner(input);
+        String keyword = scan.next();
+        switch (keyword) {
+            case "ready":
+                String name = scan.next();
+                return "Hello " + name + " you are connected to the server.";
+                
+            default:
+                return "Unknown keyword!";
+        }
     }
 }
