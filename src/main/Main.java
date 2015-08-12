@@ -14,9 +14,7 @@ public class Main {
     public static void main(String[] args) {
         Server server = new Server(PORT, 3);
         
-        for (Socket s : server.getConnections()) {
-            new Thread(new UserHandler(s)).start();
-        }
+        server.getConnections().stream().forEach( (s) -> {new Thread(new UserHandler(s)).start();} );
    
     }
 }
