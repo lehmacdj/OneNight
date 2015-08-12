@@ -13,8 +13,9 @@ public class OneNightProtocol {
     
     static State state;
     
-    public static String processInput(String input) {
+    public static String processInput(String input) {   
         if (input == null) {
+            System.err.print("Error: input string is null");
             return "Error: input string is null";
         }
         Scanner scan = new Scanner(input);
@@ -23,7 +24,7 @@ public class OneNightProtocol {
             case "ready":
                 String name = scan.next();
                 return "Hello " + name + " you are connected to the server.";
-                
+            
             default:
                 return "Unknown keyword!";
         }
