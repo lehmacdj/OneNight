@@ -7,7 +7,7 @@ public class Registry {
     
     //A singleton structure
     private static Registry instance = null;
-    public Registry getInstance() {
+    public static Registry getInstance() {
         if (instance ==null) {
             return instance = new Registry();
         } else {
