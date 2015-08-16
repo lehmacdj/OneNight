@@ -17,6 +17,7 @@ public class Registry {
     
     public final Role alphaWolf = new AlphaWolf();
     public final Role apprenticeSeer = new ApprenticeSeer();
+    public final Role auraSeer = new AuraSeer();
     public final Role bodyguard = new Bodyguard();
     public final Role curator = new Curator();
     public final Role cursed = new Cursed();
