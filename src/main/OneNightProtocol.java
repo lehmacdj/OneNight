@@ -7,11 +7,6 @@ import java.util.Scanner;
  */
 public class OneNightProtocol { 
     
-    static enum State {
-        
-    }
-    
-    static State state;
     
     public static String processInput(String input) {   
         if (input == null) {
