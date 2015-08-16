@@ -1,8 +1,5 @@
 package main;
 
-import java.io.*;
-import java.util.*;
-import java.net.*;
 import org.apache.commons.cli.*;
 
 /**
@@ -72,7 +69,12 @@ public class Main {
             if ( !(line.hasOption("l") && line.hasOption("f")) || line.hasOption("r")) {
                 //Generate a random ArrayList<Role>
             }
-        } catch (ParseException e) {
+        }
+        catch (NumberFormatException e) {
+            System.err.println("Invalid number of players. arg of -n must be an integer");
+            System.exit(1);
+        }
+        catch (ParseException e) {
             System.err.println("Unexpected exeption: " + e.getMessage());
         }
         
