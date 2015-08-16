@@ -5,4 +5,8 @@ package roles;
  */
 public class Troublemaker extends Role {
     
+    Troublemaker() {
+        super("Troublemaker");
+    }
+    
 }

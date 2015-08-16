@@ -5,4 +5,8 @@ package roles;
  */
 public class VillageIdiot extends Role {
 
+    VillageIdiot() {
+        super("Village Idiot");
+    }
+    
 }

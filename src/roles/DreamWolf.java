@@ -5,4 +5,8 @@ package roles;
  */
 public class DreamWolf extends Role {
     
+    public DreamWolf() {
+        super("DreamWolf");
+    }
+    
 }

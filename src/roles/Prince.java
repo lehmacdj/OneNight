@@ -5,4 +5,8 @@ package roles;
  */
 public class Prince extends Role {
     
+    Prince() {
+        super("Prince");
+    }
+    
 }

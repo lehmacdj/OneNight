@@ -5,4 +5,8 @@ package roles;
  */
 public class Werewolf extends Role {
     
+    Werewolf() {
+        super("Werewolf");
+    }
+    
 }

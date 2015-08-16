@@ -5,4 +5,8 @@ package roles;
  */
 public class Curator extends Role {
     
+    Curator() {
+        super("Curator");
+    }
+    
 }

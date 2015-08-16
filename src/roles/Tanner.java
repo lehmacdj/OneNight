@@ -5,4 +5,8 @@ package roles;
  */
 public class Tanner extends Role {
     
+    Tanner() {
+        super("Tanner");
+    }
+    
 }

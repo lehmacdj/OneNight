@@ -5,4 +5,8 @@ package roles;
  */
 public class Mason extends Role {
 
+    Mason() {
+        super("Mason");
+    }
+    
 }

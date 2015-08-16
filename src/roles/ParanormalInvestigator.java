@@ -5,4 +5,8 @@ package roles;
  */
 public class ParanormalInvestigator extends Role {
     
+    ParanormalInvestigator() {
+        super("Paranormal Investigator");
+    }
+    
 }
