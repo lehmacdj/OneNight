@@ -4,15 +4,16 @@ import java.net.*;
 import java.io.*;
 
 /**
- *
  * @author devin
  */
 public class UserHandler implements Runnable {
     
     private final Socket socket;
+    private final Player user;
     
-    public UserHandler(Socket user) {
-        socket = user;
+    public UserHandler(Player user) {
+        this.user = user;
+        socket = this.user.SOCKET;
     }
     
     @Override public void run() {
@@ -23,7 +24,7 @@ public class UserHandler implements Runnable {
             String fromUser = null;
             while ( (fromUser = in.readLine()) != null)  {
                 System.out.println(fromUser);
-                out.print(OneNightProtocol.processInput(fromUser));
+                out.println(OneNightProtocol.processInput(fromUser));
                 out.flush();
             }
         } catch (IOException e) {

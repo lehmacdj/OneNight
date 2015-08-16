@@ -12,18 +12,18 @@ import java.util.*;
 public class Server {
     
     private final int PORT;
-    private final List<Socket> connections;
+    private final List<Player> players;
     
     public Server(int port, int players) {
         PORT = port;
-        connections = new ArrayList<>();
+        this.players = new ArrayList<>();
         //connect to all of the clients
         try (
             ServerSocket serverSocket = new ServerSocket(PORT);
         ) {
-            while (connections.size() < players) {
+            while (this.players.size() < players) {
                 Socket socket = serverSocket.accept();
-                connections.add(socket);
+                this.players.add(new Player(socket));
             }
         } catch (IOException e) {
             System.err.println("Could not connect to client.");
@@ -31,8 +31,8 @@ public class Server {
 
     }
         
-    public List<Socket> getConnections() {
-        return connections;
+    public List<Player> getPlayers() {
+        return players;
     }
     
 }

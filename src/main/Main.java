@@ -18,7 +18,7 @@ public class Main {
         Server server = new Server(PORT, 3); //pass the Roles array to the server and assign each player a role during initialization
         
         //have the protocol use the roles assigned to players to personalize the protocol
-        server.getConnections().stream().forEach( (s) -> {new Thread(new UserHandler(s)).start();} );
+        server.getPlayers().stream().forEach( (p) -> {new Thread(new UserHandler(p)).start();} );
    
     }
 }
