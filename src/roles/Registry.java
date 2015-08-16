@@ -15,30 +15,30 @@ public class Registry {
         }
     }
     
-    Role alphaWolf = new AlphaWolf();
-    Role apprenticeSeer = new ApprenticeSeer();
-    Role bodyguard = new Bodyguard();
-    Role curator = new Curator();
-    Role cursed = new Cursed();
-    Role doppelganger = new Doppelganger();
-    Role dreamWolf = new DreamWolf();
-    Role drunk = new Drunk();
-    Role hunter = new Hunter();
-    Role insomniac = new Insomniac();
-    Role mason = new Mason();
-    Role minion = new Minion();
-    Role mysticWolf = new MysticWolf();
-    Role paranormalInvestigator = new ParanormalInvestigator();
-    Role prince = new Prince();
-    Role revealer = new Revealer();
-    Role robber = new Robber();
-    Role seer = new Seer();
-    Role sentinel = new Sentinel();
-    Role tanner = new Tanner();
-    Role troublemaker = new Troublemaker();
-    Role villageIdiot = new VillageIdiot();
-    Role villager = new Villager();
-    Role werewolf = new Werewolf();
-    Role witch = new Witch();
+    public final Role alphaWolf = new AlphaWolf();
+    public final Role apprenticeSeer = new ApprenticeSeer();
+    public final Role bodyguard = new Bodyguard();
+    public final Role curator = new Curator();
+    public final Role cursed = new Cursed();
+    public final Role doppelganger = new Doppelganger();
+    public final Role dreamWolf = new DreamWolf();
+    public final Role drunk = new Drunk();
+    public final Role hunter = new Hunter();
+    public final Role insomniac = new Insomniac();
+    public final Role mason = new Mason();
+    public final Role minion = new Minion();
+    public final Role mysticWolf = new MysticWolf();
+    public final Role paranormalInvestigator = new ParanormalInvestigator();
+    public final Role prince = new Prince();
+    public final Role revealer = new Revealer();
+    public final Role robber = new Robber();
+    public final Role seer = new Seer();
+    public final Role sentinel = new Sentinel();
+    public final Role tanner = new Tanner();
+    public final Role troublemaker = new Troublemaker();
+    public final Role villageIdiot = new VillageIdiot();
+    public final Role villager = new Villager();
+    public final Role werewolf = new Werewolf();
+    public final Role witch = new Witch();
     
 }
