@@ -14,6 +14,8 @@ public class Main {
     
     static final int PORT = 9100;
     
+    static final ArrayList<Role> centerCards = new ArrayList<>();
+    
     public static void main(String[] args) { //pass roles via command line parameter
         //set up command line option parsing
         //see http://commons.apache.org/proper/commons-cli/usage.html
@@ -162,16 +164,15 @@ public class Main {
             System.exit(1);
         }
         
+        System.out.println("The roles are:");
         for (Role r : roles) {
             System.out.println(r.getName());
         }        
-       
-        System.exit(0);
         
-        Server server = new Server(PORT, numberOfPlayers); //pass the Roles array to the server and assign each player a role during initialization
+        State state = new State(PORT, numberOfPlayers, roles); //pass the Roles array to the server and assign each player a role during initialization
         
         //have the protocol use the roles assigned to players to personalize the protocol
-        server.getPlayers().stream().forEach( (p) -> {new Thread(new UserHandler(p)).start();} );
+        state.getPlayers().stream().forEach( (p) -> {new Thread(new UserHandler(p)).start();} );
    
     }
 }

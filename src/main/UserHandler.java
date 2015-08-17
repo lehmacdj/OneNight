@@ -24,7 +24,7 @@ public class UserHandler implements Runnable {
             String fromUser = null;
             while ( (fromUser = in.readLine()) != null)  {
                 System.out.println(fromUser);
-                out.println(OneNightProtocol.processInput(fromUser));
+                out.println(OneNightProtocol.processInput(fromUser, user));
                 out.flush();
             }
         } catch (IOException e) {
