@@ -7,13 +7,13 @@ import roles.Role;
  * @author devin
  */
 public class Player {
-    public final Socket SOCKET;
+    public final Socket socket;
     
     private Role role;
     private String name;
     
     public Player(Socket socket) {
-        SOCKET = socket;
+        this.socket = socket;
         role = null;
     }
     

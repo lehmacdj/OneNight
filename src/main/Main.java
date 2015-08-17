@@ -171,8 +171,10 @@ public class Main {
         
         State state = new State(PORT, numberOfPlayers, roles); //pass the Roles array to the server and assign each player a role during initialization
         
+        OneNightProtocol protocol = new OneNightProtocol(state);
+        
         //have the protocol use the roles assigned to players to personalize the protocol
-        state.getPlayers().stream().forEach( (p) -> {new Thread(new UserHandler(p)).start();} );
+        state.getPlayers().stream().forEach( (p) -> {new Thread(new UserHandler(p, state, protocol)).start();} );
    
     }
 }

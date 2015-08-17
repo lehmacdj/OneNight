@@ -15,6 +15,7 @@ public class State {
     private final List<Player> players;
     private final List<Role> centerCards;
     
+    
     public State(int port, int playerNumber, List<Role> roles) {
         PORT = port;
         

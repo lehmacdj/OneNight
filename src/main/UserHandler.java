@@ -9,11 +9,15 @@ import java.io.*;
 public class UserHandler implements Runnable {
     
     private final Socket socket;
+    private final State state;
     private final Player user;
+    private final OneNightProtocol protocol;
     
-    public UserHandler(Player user) {
+    public UserHandler(Player user, State state, OneNightProtocol protocol) {
         this.user = user;
-        socket = this.user.SOCKET;
+        socket = this.user.socket;
+        this.protocol = protocol;
+        this.state = state;
     }
     
     @Override public void run() {
@@ -24,7 +28,7 @@ public class UserHandler implements Runnable {
             String fromUser = null;
             while ( (fromUser = in.readLine()) != null)  {
                 System.out.println(fromUser);
-                out.println(OneNightProtocol.processInput(fromUser, user));
+                out.println(protocol.processInput(fromUser, user));
                 out.flush();
             }
         } catch (IOException e) {

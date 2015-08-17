@@ -6,8 +6,14 @@ import java.util.Scanner;
  * @author devin
  */
 public class OneNightProtocol { 
+    
+    public final State state;
+    
+    public OneNightProtocol(State state) {
+        this.state = state;
+    }
 
-    public static String processInput(String input, Player player) {   
+    public String processInput(String input, Player player) {   
         if (input == null) {
             System.err.print("Error: input string is null");
             return "Error: input string is null";
