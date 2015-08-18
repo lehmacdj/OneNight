@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -13,7 +14,7 @@ public class State {
     
     private final int PORT;
     private final List<Player> players;
-    private final List<Role> centerCards;
+    private final List<CenterCard> centerCards;
     
     
     public State(int port, int playerNumber, List<Role> roles) {
@@ -24,9 +25,9 @@ public class State {
         
         //initialize the center cards
         centerCards = new ArrayList<>();
-        centerCards.add(roles.remove(0));
-        centerCards.add(roles.remove(0));
-        centerCards.add(roles.remove(0));        
+        centerCards.add(new CenterCard(roles.remove(0)));
+        centerCards.add(new CenterCard(roles.remove(0)));
+        centerCards.add(new CenterCard(roles.remove(0)));        
         
         //connect to all of the clients
         //and inititialize the player array
@@ -38,10 +39,13 @@ public class State {
                 Socket socket = serverSocket.accept();
                 Player player = new Player(socket);
                 player.setRole(roles.remove(0));
+                player.out.println("uuid=" + player.getUUID());
+                player.out.flush();
                 players.add(player);
             }
         } catch (IOException e) {
-            System.err.println("Could not connect to client.");
+            System.err.println("Error: Could not connect to client.");
+            System.exit(1);
         }
 
     }
@@ -50,8 +54,53 @@ public class State {
         return players;
     }
     
-    public List<Role> getCenterCards() {
+    public List<CenterCard> getCenterCards() {
         return centerCards;
     }
+    
+    private Map<UUID, Player> uuidToPlayer = null;
+    public Player uuidToPlayer(UUID uuid) {
+        if (uuidToPlayer == null) {
+            uuidToPlayer = new HashMap<>();
+            players.stream().forEach( (p) -> {uuidToPlayer.put(p.getUUID(), p);} );
+        }
+        return uuidToPlayer.get(uuid);
+    }
+    
+    private Map<String, Player> stringToPlayer = null;
+    private Player nameToPlayer(String name) {
+        if (stringToPlayer == null) {
+            stringToPlayer = new HashMap<>();
+            players.stream().forEach( (p) -> {stringToPlayer.put(p.getName(), p);} );
+        }
+        return stringToPlayer.get(name);
+    }
+    
+    private CardLocation parsePosition(String pos) {
+        Scanner parse = new Scanner(pos);
+        parse.useDelimiter("-");
+        boolean isCenter = parse.next().equals("C");
+        if (isCenter) {
+            int index = parse.nextInt();
+            return centerCards.get(index);
+        } else {
+            String name = parse.next().trim();
+            return nameToPlayer(name);
+        }
+    }
+    
+    //Pos1 and Pos2 are in the form of C-[index] or P-[name]
+    public void move(String pos1, String pos2) {
+        CardLocation location1 = parsePosition(pos1);
+        CardLocation location2 = parsePosition(pos2);
+        Role tmpRole = location1.getRole();
+        location1.setRole(location2.getRole());
+        location2.setRole(tmpRole);
+    }
+    
+    public Role look(String pos) {
+        return parsePosition(pos).getRole();
+    }
+    
     
 }

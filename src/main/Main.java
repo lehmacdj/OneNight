@@ -31,8 +31,8 @@ public class Main {
                                     .desc("set the number of players. defaults to 5")
                                     .build();
         
-        Option setList = Option.builder("l")
-                           .longOpt("list")
+        Option setList = Option.builder("s")
+                           .longOpt("set")
                            .hasArg()
                            .argName("list")
                            .desc("use a set specified by a list of cards. cards should be separated by commas")
@@ -59,32 +59,32 @@ public class Main {
         
         //create an associative map of roles
         Map<String,Role> stringToRole = new HashMap<>();
-        stringToRole.put(Registry.getInstance().alphaWolf.getName(), Registry.getInstance().alphaWolf);
-        stringToRole.put(Registry.getInstance().apprenticeSeer.getName(), Registry.getInstance().apprenticeSeer);
-        stringToRole.put(Registry.getInstance().auraSeer.getName(), Registry.getInstance().auraSeer);
-        stringToRole.put(Registry.getInstance().bodyguard.getName(), Registry.getInstance().bodyguard);
-        stringToRole.put(Registry.getInstance().curator.getName(), Registry.getInstance().curator);
-        stringToRole.put(Registry.getInstance().cursed.getName(), Registry.getInstance().cursed);
-        stringToRole.put(Registry.getInstance().doppelganger.getName(), Registry.getInstance().doppelganger);
-        stringToRole.put(Registry.getInstance().dreamWolf.getName(), Registry.getInstance().dreamWolf);
-        stringToRole.put(Registry.getInstance().drunk.getName(), Registry.getInstance().drunk);
-        stringToRole.put(Registry.getInstance().hunter.getName(), Registry.getInstance().hunter);
-        stringToRole.put(Registry.getInstance().insomniac.getName(), Registry.getInstance().insomniac);
-        stringToRole.put(Registry.getInstance().mason.getName(), Registry.getInstance().mason);
-        stringToRole.put(Registry.getInstance().minion.getName(), Registry.getInstance().minion);
-        stringToRole.put(Registry.getInstance().mysticWolf.getName(), Registry.getInstance().mysticWolf);
-        stringToRole.put(Registry.getInstance().paranormalInvestigator.getName(), Registry.getInstance().paranormalInvestigator);
-        stringToRole.put(Registry.getInstance().prince.getName(), Registry.getInstance().prince);
-        stringToRole.put(Registry.getInstance().revealer.getName(), Registry.getInstance().revealer);
-        stringToRole.put(Registry.getInstance().robber.getName(), Registry.getInstance().robber);
-        stringToRole.put(Registry.getInstance().seer.getName(), Registry.getInstance().seer);
-        stringToRole.put(Registry.getInstance().sentinel.getName(), Registry.getInstance().sentinel);
-        stringToRole.put(Registry.getInstance().tanner.getName(), Registry.getInstance().tanner);
-        stringToRole.put(Registry.getInstance().troublemaker.getName(), Registry.getInstance().troublemaker);
-        stringToRole.put(Registry.getInstance().villageIdiot.getName(), Registry.getInstance().villageIdiot);
-        stringToRole.put(Registry.getInstance().villager.getName(), Registry.getInstance().villager);
-        stringToRole.put(Registry.getInstance().werewolf.getName(), Registry.getInstance().werewolf);
-        stringToRole.put(Registry.getInstance().witch.getName(), Registry.getInstance().witch);
+        stringToRole.put(Registry.getInstance().alphaWolf.name, Registry.getInstance().alphaWolf);
+        stringToRole.put(Registry.getInstance().apprenticeSeer.name, Registry.getInstance().apprenticeSeer);
+        stringToRole.put(Registry.getInstance().auraSeer.name, Registry.getInstance().auraSeer);
+        stringToRole.put(Registry.getInstance().bodyguard.name, Registry.getInstance().bodyguard);
+        stringToRole.put(Registry.getInstance().curator.name, Registry.getInstance().curator);
+        stringToRole.put(Registry.getInstance().cursed.name, Registry.getInstance().cursed);
+        stringToRole.put(Registry.getInstance().doppelganger.name, Registry.getInstance().doppelganger);
+        stringToRole.put(Registry.getInstance().dreamWolf.name, Registry.getInstance().dreamWolf);
+        stringToRole.put(Registry.getInstance().drunk.name, Registry.getInstance().drunk);
+        stringToRole.put(Registry.getInstance().hunter.name, Registry.getInstance().hunter);
+        stringToRole.put(Registry.getInstance().insomniac.name, Registry.getInstance().insomniac);
+        stringToRole.put(Registry.getInstance().mason.name, Registry.getInstance().mason);
+        stringToRole.put(Registry.getInstance().minion.name, Registry.getInstance().minion);
+        stringToRole.put(Registry.getInstance().mysticWolf.name, Registry.getInstance().mysticWolf);
+        stringToRole.put(Registry.getInstance().paranormalInvestigator.name, Registry.getInstance().paranormalInvestigator);
+        stringToRole.put(Registry.getInstance().prince.name, Registry.getInstance().prince);
+        stringToRole.put(Registry.getInstance().revealer.name, Registry.getInstance().revealer);
+        stringToRole.put(Registry.getInstance().robber.name, Registry.getInstance().robber);
+        stringToRole.put(Registry.getInstance().seer.name, Registry.getInstance().seer);
+        stringToRole.put(Registry.getInstance().sentinel.name, Registry.getInstance().sentinel);
+        stringToRole.put(Registry.getInstance().tanner.name, Registry.getInstance().tanner);
+        stringToRole.put(Registry.getInstance().troublemaker.name, Registry.getInstance().troublemaker);
+        stringToRole.put(Registry.getInstance().villageIdiot.name, Registry.getInstance().villageIdiot);
+        stringToRole.put(Registry.getInstance().villager.name, Registry.getInstance().villager);
+        stringToRole.put(Registry.getInstance().werewolf.name, Registry.getInstance().werewolf);
+        stringToRole.put(Registry.getInstance().witch.name, Registry.getInstance().witch);
         
         //the number of players that will play the game
         //the default number of players = 5
@@ -101,9 +101,9 @@ public class Main {
                 //maybe catch this exception
                 numberOfPlayers = Integer.parseInt(line.getOptionValue("n"));
             }
-            if (line.hasOption("l")) {
+            if (line.hasOption("s")) {
                 //generate roles from a list
-                Scanner list = new Scanner(line.getOptionValue("l"));
+                Scanner list = new Scanner(line.getOptionValue("s"));
                 list.useDelimiter(",");
                 while (list.hasNext()) {
                     String roleString = list.next().trim();
@@ -166,7 +166,7 @@ public class Main {
         
         System.out.println("The roles are:");
         for (Role r : roles) {
-            System.out.println(r.getName());
+            System.out.println(r.name);
         }        
         
         State state = new State(PORT, numberOfPlayers, roles); //pass the Roles array to the server and assign each player a role during initialization
