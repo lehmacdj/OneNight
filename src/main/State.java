@@ -20,6 +20,14 @@ public class State {
     public State(int port, int playerNumber, List<Role> roles) {
         PORT = port;
         
+        //generate a role string
+        StringBuilder roleStringBuilder = new StringBuilder();
+        roles.stream().forEach((r) -> {
+            roleStringBuilder.append(r.name);
+            roleStringBuilder.append(", ");
+        });
+        String roleString = roleStringBuilder.toString();
+        
         //shuffle the roles
         Collections.shuffle(roles);
         
@@ -40,6 +48,7 @@ public class State {
                 Player player = new Player(socket);
                 player.setRole(roles.remove(0));
                 player.out.println("uuid=" + player.getUUID());
+                player.out.println("set=" + roleString);
                 player.out.flush();
                 players.add(player);
             }
@@ -47,7 +56,20 @@ public class State {
             System.err.println("Error: Could not connect to client.");
             System.exit(1);
         }
-
+        
+        //generate a player string
+        StringBuilder playerStringBuilder = new StringBuilder();
+        players.stream().forEach((p) -> {
+           playerStringBuilder.append(p.getName());
+           playerStringBuilder.append(", ");
+        });
+        String playerString = playerStringBuilder.toString();
+        
+        //send the player string to the players
+        players.stream().forEach((p) -> {
+            p.out.println("players=" + playerString);
+        });
+        
     }
         
     public List<Player> getPlayers() {
