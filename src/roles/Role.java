@@ -11,4 +11,8 @@ public abstract class Role {
         this.name = name;
     }
     
+    @Override public String toString() {
+        return name;
+    }
+    
 }
