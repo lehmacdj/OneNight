@@ -50,12 +50,18 @@ public class Main {
                                  .desc("use a random set. the default")
                                  .build();
         
+        Option help = Option.builder("h")
+                            .longOpt("help")
+                            .desc("prints this message")
+                            .build();
+        
         //create the options object and add the options to it
         Options options = new Options();
         options.addOption(setList);
         options.addOption(setFile);
         options.addOption(setRandom);
         options.addOption(playerNumber);
+        options.addOption(help);
         
         //create an associative map of roles
         Map<String,Role> stringToRole = new HashMap<>();
@@ -96,6 +102,13 @@ public class Main {
         //parse the command line options
         try {
             CommandLine line = parser.parse(options, args);
+            
+            if (line.hasOption("h")) {
+                //print a help message
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("java -jar OneNight.jar", options);
+                System.exit(0);
+            }
             
             if (line.hasOption("n")) {
                 //maybe catch this exception
@@ -152,7 +165,7 @@ public class Main {
             }
         }
         catch (FileNotFoundException e) {
-            System.err.println("Unreported exception: " + e.getMessage());
+            System.err.println("The specified file does not exist");
             System.exit(1);
         }
         catch (NumberFormatException e) {
@@ -165,9 +178,9 @@ public class Main {
         }
         
         System.out.println("The roles are:");
-        for (Role r : roles) {
+        roles.stream().forEach((r) -> {
             System.out.println(r.name);
-        }        
+        });
         
         State state = new State(PORT, numberOfPlayers, roles); //pass the Roles array to the server and assign each player a role during initialization
         
