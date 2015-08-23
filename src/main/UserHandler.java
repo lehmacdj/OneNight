@@ -24,7 +24,6 @@ public class UserHandler implements Runnable {
             while ( (fromUser = player.in.readLine()) != null)  {
                 System.out.println(fromUser);
                 player.out.println(protocol.processInput(fromUser));
-                player.out.flush();
             }
         } catch (IOException e) {
             System.err.println("Failed to read from input stream.");

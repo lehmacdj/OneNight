@@ -21,14 +21,19 @@ public class OneNightProtocol {
             return "Error: input string is null";
         }
         Scanner scan = new Scanner(input);
-        String uuidString = scan.next();
-        UUID uuid = UUID.fromString(uuidString);
+        int uuid = scan.nextInt();
+        //UUID uuid = UUID.fromString(uuidString);
         Player player = state.uuidToPlayer(uuid);
         String keyword = scan.next();
         switch (keyword) {
             case "ready":
-                player.setName(scan.next());
-                return "role=" + player.getRole().name;
+                String name = scan.next();
+                if (!state.nameIsTaken(name)) {
+                    player.setName(name);
+                    return "role=" + player.getRole().name;
+                } else {
+                    return "Error: name already taken.";
+                }
             case "move":
                 String position1 = scan.next();
                 String position2 = scan.next();

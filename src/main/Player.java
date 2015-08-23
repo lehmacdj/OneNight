@@ -13,15 +13,20 @@ public class Player implements CardLocation {
     private final Socket socket;
     private Role role;
     private String name;
-    private final UUID uuid;
+    private final int uuid;
     public final PrintWriter out;
     public final BufferedReader in;
+    
+    static int playerid = 0;
+    private static int nextPlayerId() {
+        return playerid++;
+    }
     
     public Player(Socket socket) throws IOException {
         this.socket = socket;
         role = null;
-        uuid = UUID.randomUUID();
-        out = new PrintWriter(this.socket.getOutputStream());
+        uuid = nextPlayerId();
+        out = new PrintWriter(this.socket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
     }
     
@@ -40,7 +45,7 @@ public class Player implements CardLocation {
         this.name = name;
     }
     
-    public UUID getUUID() {
+    public int getUUID() {
         return uuid;
     }
     
