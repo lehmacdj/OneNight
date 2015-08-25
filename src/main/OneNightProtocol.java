@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -20,14 +21,22 @@ public class OneNightProtocol {
             System.err.print("Error: input string is null");
             return "Error: input string is null";
         }
-        Scanner scan = new Scanner(input);
-        int uuid = scan.nextInt();
-        //UUID uuid = UUID.fromString(uuidString);
+        Scanner parse = new Scanner(input);
+        ArrayList<String> args = new ArrayList<>();
+        while (parse.hasNext()) {
+            args.add(parse.next());
+        }
+        UUID uuid;
+        try {
+             uuid = UUID.fromString(args.get(0));
+        } catch (Exception e) {
+            return "Invalid UUID: " + args.get(0);
+        }
         Player player = state.uuidToPlayer(uuid);
-        String keyword = scan.next();
+        String keyword = args.get(1);
         switch (keyword) {
             case "ready":
-                String name = scan.next();
+                String name = args.get(2);
                 if (!state.nameIsTaken(name)) {
                     player.setName(name);
                     return "role=" + player.getRole().name;
@@ -35,15 +44,16 @@ public class OneNightProtocol {
                     return "Error: name already taken.";
                 }
             case "move":
-                String position1 = scan.next();
-                String position2 = scan.next();
+                String position1 = args.get(2);
+                String position2 = args.get(3);
                 state.move(position1, position2);
                 return "moved " + position1 + " and " + position2;
             case "look":
-                String position = scan.next();
+                String position = args.get(2);
                 return position + "=" + state.look(position).name;
             default:
                 return "Unknown keyword!";
         }
     }
+    
 }

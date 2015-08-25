@@ -17,7 +17,7 @@ public class State {
     private final List<Player> players;
     private final List<CenterCard> centerCards;
     private Map<String, Player> nameToPlayer;
-    private Map<Integer, Player> uuidToPlayer;
+    private Map<UUID, Player> uuidToPlayer;
     
     public State(int port, int playerNumber, List<Role> roles) {
         PORT = port;
@@ -123,7 +123,7 @@ public class State {
         return centerCards;
     }
     
-    public Player uuidToPlayer(int uuid) {
+    public Player uuidToPlayer(UUID uuid) {
         return uuidToPlayer.get(uuid);
     }
     
