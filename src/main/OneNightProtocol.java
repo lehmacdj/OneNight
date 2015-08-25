@@ -30,7 +30,7 @@ public class OneNightProtocol {
         try {
              uuid = UUID.fromString(args.get(0));
         } catch (Exception e) {
-            return "Invalid UUID: " + args.get(0);
+            return "Invalid UUID: " + args.get(0) + "\n>>>";
         }
         Player player = state.uuidToPlayer(uuid);
         String keyword = args.get(1);
@@ -41,18 +41,18 @@ public class OneNightProtocol {
                     player.setName(name);
                     return "role=" + player.getRole().name;
                 } else {
-                    return "Error: name already taken.";
+                    return "Error: name already taken.\n>>>";
                 }
             case "move":
                 String position1 = args.get(2);
                 String position2 = args.get(3);
                 state.move(position1, position2);
-                return "moved " + position1 + " and " + position2;
+                return "moved " + position1 + " and " + position2 + "\n>>>";
             case "look":
                 String position = args.get(2);
-                return position + "=" + state.look(position).name;
+                return position + "=" + state.look(position).name + "\n>>>";
             default:
-                return "Unknown keyword!";
+                return "Unknown keyword!\n>>>";
         }
     }
     
