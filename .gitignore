@@ -1,14 +1,6 @@
-# User specific netbeans files
-nbproject/private/
-build/
-nbbuild/
-nbdist/
-dist/
-nbactions.xml
-nb-configuration.xml
+#Eclipse Project Files
+bin/
+.project
 
-# A folder for scripts and stuff unrelated to project
-util/
-
-# So that .DS_Store doesn't ruin everything
+#.DS_Store
 .DS_Store

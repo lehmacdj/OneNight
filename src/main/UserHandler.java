@@ -1,7 +1,6 @@
 package main;
 
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
 
 /**
  * @author devin

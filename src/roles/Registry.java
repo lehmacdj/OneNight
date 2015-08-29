@@ -1,5 +1,7 @@
 package roles;
 
+import java.util.ArrayList;
+
 /**
  * @author Devin Lehmacher <lehmacdj@gmail.com>
  */
@@ -14,7 +16,7 @@ public class Registry {
             return instance;
         }
     }
-    
+        
     public final Role alphaWolf = new AlphaWolf();
     public final Role apprenticeSeer = new ApprenticeSeer();
     public final Role auraSeer = new AuraSeer();

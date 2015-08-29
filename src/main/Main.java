@@ -2,8 +2,19 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
-import org.apache.commons.cli.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 import roles.Registry;
 import roles.Role;
 
@@ -28,31 +39,31 @@ public class Main {
                                     .longOpt("player-number")
                                     .hasArg()
                                     .argName("number")
-                                    .desc("set the number of players. defaults to 5")
+                                    .desc("set the number of players. defaults to 5.")
                                     .build();
         
         Option setList = Option.builder("s")
                            .longOpt("set")
                            .hasArg()
                            .argName("list")
-                           .desc("use a set specified by a list of cards. cards should be separated by commas")
+                           .desc("use a set specified by a list of cards. cards should be separated by commas.")
                            .build();
         
         Option setFile = Option.builder("f")
                                .longOpt("file")
                                .hasArg()
                                .argName("file")
-                               .desc("use a set specified by a file")
+                               .desc("use a set specified by a file.")
                                .build();
         
         Option setRandom = Option.builder("r")
                                  .longOpt("random")
-                                 .desc("use a random set. the default")
+                                 .desc("use a random set. currently not supported.")
                                  .build();
         
         Option help = Option.builder("h")
                             .longOpt("help")
-                            .desc("prints this message")
+                            .desc("prints this message.")
                             .build();
         
         //create the options object and add the options to it
@@ -102,21 +113,14 @@ public class Main {
         //parse the command line options
         try {
             CommandLine line = parser.parse(options, args);
-            
-            if (line.hasOption("h")) {
-                //print a help message
-                HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("java -jar OneNight.jar", options);
-                System.exit(0);
-            }
-            
+                        
             if (line.hasOption("n")) {
                 //maybe catch this exception
                 numberOfPlayers = Integer.parseInt(line.getOptionValue("n"));
             }
             if (line.hasOption("s")) {
                 //generate roles from a list
-                Scanner list = new Scanner(line.getOptionValue("s"));
+				Scanner list = new Scanner(line.getOptionValue("s"));
                 list.useDelimiter(",");
                 while (list.hasNext()) {
                     String roleString = list.next().trim();
@@ -160,8 +164,10 @@ public class Main {
                     System.exit(1);
                 }
             } else {
-                System.err.println("Random set generation is not yet supported.");
-                System.exit(1);
+                //print a help message
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("java -jar OneNight.jar", options);
+                System.exit(0);
             }
         }
         catch (FileNotFoundException e) {
