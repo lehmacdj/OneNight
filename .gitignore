@@ -1,6 +1,10 @@
 #Eclipse Project Files
 bin/
 .project
+.classpath
+
+#Utility files for helping out with code writing and running
+util/
 
 #.DS_Store
 .DS_Store
