@@ -6,5 +6,5 @@ bin/
 #Utility files for helping out with code writing and running
 util/
 
-#.DS_Store
+#.DS_Store -- in case it crops up
 .DS_Store

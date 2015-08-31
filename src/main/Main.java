@@ -56,7 +56,8 @@ public class Main {
                                .desc("use a set specified by a file.")
                                .build();
         
-        Option setRandom = Option.builder("r")
+        @SuppressWarnings("unused")
+		Option setRandom = Option.builder("r")
                                  .longOpt("random")
                                  .desc("use a random set. currently not supported.")
                                  .build();
@@ -70,7 +71,8 @@ public class Main {
         Options options = new Options();
         options.addOption(setList);
         options.addOption(setFile);
-        options.addOption(setRandom);
+        /* don't use set random because it is not yet implemented */
+        //options.addOption(setRandom);
         options.addOption(playerNumber);
         options.addOption(help);
         
