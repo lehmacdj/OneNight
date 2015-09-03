@@ -5,19 +5,31 @@ import java.util.Scanner;
 import java.util.UUID;
 
 /**
+ * An implementation of Protocol made to return responses to client input and modify
+ * the state based on that.
  * @author devin
  */
 public class OneNightProtocol implements Protocol { 
     
-    public final State state;
+    private final State state;
     private Phase phase;
     
+    /**
+     * Constructor: Creates a new instance of this object with capabilities to respond to client input.
+     * @param state The state object to be modified.
+     */
     public OneNightProtocol(State state) {
         this.state = state;
         phase = Phase.Waiting;
     }
 
-    // Each query should be in the form of "id command [options]".
+    /**
+     * Returns a string to send to the client corresponding to the given input string.  Also 
+     * updates the state object.
+     * Precondition: query is of the form "id command [options]"
+     * @param The client's string to be executed / translated into a return. input is of the form
+     * @return The string to send to the client
+     */
     public String processInput(String input) {   
     	
     	//Check for errors in the input string
