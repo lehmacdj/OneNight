@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 import roles.Role;
 
 /**
- * @author Devin Lehmacher
+ * An instance of this class represents the game state for One Night Ultimate Werewolf.
+ * @author devin
  */
 public class State {
     
