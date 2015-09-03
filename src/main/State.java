@@ -20,14 +20,21 @@ import roles.Role;
  */
 public class State {
     
-    private final int PORT;
-    private final List<Player> players;
-    private final List<CenterCard> centerCards;
-    private Map<String, Player> nameToPlayer;
-    private Map<UUID, Player> uuidToPlayer;
+    private final List<Player> players; //the players that are playing the game !null
+    private final List<CenterCard> centerCards; //the center cards.  3 or 4 elements.
+    private Map<String, Player> nameToPlayer; //a map to convert a name to a player
+    private Map<UUID, Player> uuidToPlayer; //a map to convert a UUID to a player
+    private Protocol protocol; //a protocol used to process string input from the user
     
+    /**
+     * Constructor: Creates a new instance of this object.  The object is represents the game state 
+     * and stores the state of all of the players.
+     * Precondition: roles is not null, player number is > 0, port is in the range 1024–49151.
+     * @param port The port number to listen on.
+     * @param playerNumber The number of players to play the game.
+     * @param roles The roles to be used for the game.
+     */
     public State(int port, int playerNumber, List<Role> roles) {
-        PORT = port;
                 
         //generate a role string
         String roleString = roles.stream()
@@ -44,10 +51,10 @@ public class State {
         }
         
         //connect to all of the clients
-        //and inititialize the player array
+        //and initialize the player array
         players = new ArrayList<>();
         try (
-            ServerSocket serverSocket = new ServerSocket(PORT);
+            ServerSocket serverSocket = new ServerSocket(port);
         ) {
             while (players.size() < playerNumber) {
                 Socket socket = serverSocket.accept();
@@ -72,10 +79,16 @@ public class State {
         players.stream().forEach( (p) -> {uuidToPlayer.put(p.getUUID(), p);} );        
     }
     
-    public void getPlayerReadyState(OneNightProtocol protocol) {
-        //get ready state from players
-        //kind of hackish -- need to find a better way to do this
-        //maybe this is fine
+    /**
+     * Waits for each player to send a ready signal with their name.  This class is not considered completely
+     * initialized until a call to this method.
+     */
+    public void getPlayerReadyState() {
+    	
+    	//initialize the protocol
+    	protocol = new OneNightProtocol(this);
+    	
+    	//wait for a message from each player
         final CountDownLatch latch = new CountDownLatch(players.size());
         players.stream().forEach((p) -> {
             new Thread(() -> {
@@ -122,14 +135,27 @@ public class State {
         players.stream().forEach( (p) -> {nameToPlayer.put(p.getName(), p);} );
     }
         
+    /**
+     * Returns a list of the players in the game.
+     * @return a list of the players in the game.
+     */
     public List<Player> getPlayers() { // add a method to add a player
         return players;
     }
     
+    /**
+     * Returns a list that contains the center cards.
+     * @return a list of the center cards.
+     */
     public List<CenterCard> getCenterCards() {
         return centerCards;
     }
     
+    /**
+     * Returns a reference to a player that corresponds with the given UUID.
+     * @param uuid The UUID to translate into a reference to a player.
+     * @return A reference to a player.
+     */
     public Player uuidToPlayer(UUID uuid) {
         return uuidToPlayer.get(uuid);
     }
@@ -152,7 +178,12 @@ public class State {
         }
     }
     
-    //Pos1 and Pos2 are in the form of C-[index] or P-[name]
+    /**
+     * Moves a card from one location to another.  Positions are in the from of P-[Player name]
+     * or C-[number].
+     * @param pos1 Position of the first card to be moved.
+     * @param pos2 Position of the second card to be moved.
+     */
     public void move(String pos1, String pos2) {
         CardLocation location1 = parsePosition(pos1);
         CardLocation location2 = parsePosition(pos2);
@@ -161,10 +192,30 @@ public class State {
         location2.setRole(tmpRole);
     }
     
+    /**
+     * Returns the Role at the specified location. Positions are in the form of P-[Player name]
+     * or C-[number].
+     * @param pos
+     * @return
+     */
     public Role look(String pos) {
         return parsePosition(pos).getRole();
     }
     
+    /**
+     * Returns a protocol to be used for the manipulation of this class and processing of the user input.
+     * @return A Protocol that can process user input and manipulate this class.
+     */
+    public Protocol getProtocol() {
+    	return protocol;
+    }
+    
+    /**
+     * Returns true if a given name is taken and false if it isn't.
+     * Precondition: name is not null and contains at least one character.
+     * @param A name to be tested.
+     * @return name true if the name is taken and false if it isn't.
+     */
     public boolean nameIsTaken(String name) {
         // if nameToPlayer returns null the key is not in the map
         return nameToPlayer(name) != null;

@@ -9,11 +9,11 @@ public class UserHandler implements Runnable {
     
     private final State state;
     private final Player player;
-    private final OneNightProtocol protocol;
+    private final Protocol protocol;
     
-    public UserHandler(Player user, State state, OneNightProtocol protocol) {
+    public UserHandler(Player user, State state) {
         this.player = user;
-        this.protocol = protocol;
+        this.protocol = state.getProtocol();
         this.state = state;
     }
     
