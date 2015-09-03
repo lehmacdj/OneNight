@@ -3,7 +3,7 @@ package main;
 import roles.Role;
 
 /**
- * @author Devin Lehmacher <lehmacdj@gmail.com>
+ * @author devin
  */
 public class CenterCard implements CardLocation {
 
