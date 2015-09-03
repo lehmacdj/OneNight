@@ -2,6 +2,7 @@
 bin/
 .project
 .classpath
+docs/
 
 #Utility files for helping out with code writing and running
 util/
