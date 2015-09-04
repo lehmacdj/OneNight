@@ -134,6 +134,7 @@ public class Main {
                         System.exit(1);
                     }
                 }
+                list.close();
                 if (roles.size() > numberOfPlayers + 3) {
                     System.err.printf("Too many roles specified: %d specified, %d required\n",
                             roles.size(), numberOfPlayers + 3);
@@ -145,9 +146,9 @@ public class Main {
                 }
             } else if (line.hasOption("f")) {
                 File file = new File(line.getOptionValue("f"));
-                Scanner list = new Scanner(file);
-                while (list.hasNext()) {
-                    String roleString = list.nextLine().trim();
+                Scanner fileScan = new Scanner(file);
+                while (fileScan.hasNext()) {
+                    String roleString = fileScan.nextLine().trim();
                     Role role = stringToRole.get(roleString);
                     if ( role != null) {
                         roles.add(role);
@@ -156,6 +157,7 @@ public class Main {
                         System.exit(1);
                     }
                 }
+                fileScan.close();
                 if (roles.size() > numberOfPlayers + 3) {
                     System.err.printf("Too many roles specified: %d specified, %d required\n",
                             roles.size(), numberOfPlayers + 3);

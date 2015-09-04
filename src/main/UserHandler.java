@@ -7,6 +7,7 @@ import java.io.IOException;
  */
 public class UserHandler implements Runnable {
     
+	@SuppressWarnings("unused")
     private final State state;
     private final Player player;
     private final Protocol protocol;

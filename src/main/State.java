@@ -167,16 +167,25 @@ public class State {
     
     //pos i s in the form of C-[index] or P-[name]
     private CardLocation parsePosition(String pos) {
-        Scanner parse = new Scanner(pos);
+        
+    	//parse the position into an ArrayList 
+    	Scanner parse = new Scanner(pos);
         parse.useDelimiter("-");
-        boolean isCenter = parse.next().equals("C");
-        if (isCenter) {
-            int index = parse.nextInt();
+        ArrayList<String> args = new ArrayList<>();
+        while (parse.hasNext()) {
+        	args.add(parse.next().trim());
+        }
+        parse.close();
+        
+        //Return the card location based on the args array
+        if (args.get(0).equals("C")) {
+            int index = Integer.parseInt(args.get(1));
             return centerCards.get(index);
         } else {
-            String name = parse.next().trim();
+            String name = args.get(1);
             return nameToPlayer(name);
         }
+        
     }
     
     /**
