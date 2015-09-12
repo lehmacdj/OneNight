@@ -84,7 +84,7 @@ public class OneNightProtocol implements Protocol {
                 
                 //Set the name for the player object and return a role to the player
                 player.setName(name);
-                return "role=" + player.getRole().name;
+                return "# Please wait until all players are ready";
                 
             case "move":
             	

@@ -62,7 +62,8 @@ public class State {
                 Player player = new Player(socket);
                 player.setRole(roles.remove(0));
                 player.out.println("uuid=" + player.getUUID());
-                player.out.println("set=" + roleString + "\n>>>");
+                player.out.println("set=" + roleString);
+                player.out.println(">>>");
                 players.add(player);
             }
         } catch (IOException e) {
@@ -128,7 +129,9 @@ public class State {
                 
         //send the player list to all of the players
         players.stream().forEach((p) -> {
-            p.out.println("players=" + playerString + "\n>>>");
+            p.out.println("players=" + playerString);
+            p.out.println("role=" + p.getRole());
+            p.out.println(">>>");
         });
         
         //init stringToPlayer for stringToPlayer(String)
