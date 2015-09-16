@@ -130,6 +130,7 @@ public class State {
         //send the player list to all of the players
         players.stream().forEach((p) -> {
             p.out.println("players=" + playerString);
+            p.out.println("name=" + p.getName());
             p.out.println("role=" + p.getRole());
             p.out.println(">>>");
         });
