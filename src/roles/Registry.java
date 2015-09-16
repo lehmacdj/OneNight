@@ -1,7 +1,5 @@
 package roles;
 
-import java.util.ArrayList;
-
 /**
  * @author Devin Lehmacher <lehmacdj@gmail.com>
  */
