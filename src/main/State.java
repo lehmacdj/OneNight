@@ -63,6 +63,7 @@ public class State {
                 player.setRole(roles.remove(0));
                 player.out.println("uuid=" + player.getUUID());
                 player.out.println("set=" + roleString);
+                player.out.println("count=" + playerNumber);
                 player.out.println(">>>");
                 players.add(player);
             }
